@@ -7,24 +7,27 @@ import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 
 /* Name of directory to retrieve your files from */
-const filePath = 'docs';
+const filePath = './docs/';
 
 export const run = async () => {
   try {
+    console.log('step 1');
     /*load raw docs from the all files in the directory */
     const directoryLoader = new DirectoryLoader(filePath, {
       '.pdf': (path) => new CustomPDFLoader(path),
     });
-
+    console.log('step 2');
     // const loader = new PDFLoader(filePath);
     const rawDocs = await directoryLoader.load();
 
+    console.log('step 3');
     /* Split text into chunks */
     const textSplitter = new RecursiveCharacterTextSplitter({
       chunkSize: 1000,
       chunkOverlap: 200,
     });
 
+    console.log('step 4');
     const docs = await textSplitter.splitDocuments(rawDocs);
     console.log('split docs', docs);
 
