@@ -11,7 +11,7 @@ COPY package.json yarn.lock next.config.js ./
 COPY .next node_modules ./
 
 # 暴露端口，确保与 next.config.js 或 .env 文件中的端口匹配
-EXPOSE 4000
+EXPOSE 8091
 
 # 运行应用程序
 CMD ["npm", "start"]
